@@ -1,0 +1,1770 @@
+
+GccApplication1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000792  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000806  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  00800060  00800060  00000806  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000806  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000838  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000168  00000000  00000000  00000874  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000134a  00000000  00000000  000009dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000095a  00000000  00000000  00001d26  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000d96  00000000  00000000  00002680  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000234  00000000  00000000  00003418  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000005e6  00000000  00000000  0000364c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000012b5  00000000  00000000  00003c32  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000f8  00000000  00000000  00004ee7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 fb 00 	jmp	0x1f6	; 0x1f6 <__vector_1>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a4 36       	cpi	r26, 0x64	; 100
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 3b 02 	call	0x476	; 0x476 <main>
+  74:	0c 94 c7 03 	jmp	0x78e	; 0x78e <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <Init>:
+static EN_APP_ERROR Init(void)
+{
+	// initialization
+	
+	
+	if (LED_init(T_LED_RED_PORT,T_LED_RED_PIN)==LED_INIT_OK)
+  7c:	63 e0       	ldi	r22, 0x03	; 3
+  7e:	81 e4       	ldi	r24, 0x41	; 65
+  80:	0e 94 44 01 	call	0x288	; 0x288 <LED_init>
+  84:	83 30       	cpi	r24, 0x03	; 3
+  86:	79 f5       	brne	.+94     	; 0xe6 <Init+0x6a>
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+	}
+	if (LED_init(T_LED_GREEN_PORT,T_LED_GREEN_PIN)==LED_INIT_OK)
+  88:	61 e0       	ldi	r22, 0x01	; 1
+  8a:	81 e4       	ldi	r24, 0x41	; 65
+  8c:	0e 94 44 01 	call	0x288	; 0x288 <LED_init>
+  90:	83 30       	cpi	r24, 0x03	; 3
+  92:	59 f5       	brne	.+86     	; 0xea <Init+0x6e>
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+	}
+	if (LED_init(T_LED_YELLOW_PORT,T_LED_YELLOW_PIN)==LED_INIT_OK)
+  94:	62 e0       	ldi	r22, 0x02	; 2
+  96:	81 e4       	ldi	r24, 0x41	; 65
+  98:	0e 94 44 01 	call	0x288	; 0x288 <LED_init>
+  9c:	83 30       	cpi	r24, 0x03	; 3
+  9e:	39 f5       	brne	.+78     	; 0xee <Init+0x72>
+	else
+	{
+		return INIT_APP_ERROR;
+	}
+
+	if (LED_init(W_LED_RED_PORT,W_LED_RED_PIN)==LED_INIT_OK)
+  a0:	63 e0       	ldi	r22, 0x03	; 3
+  a2:	82 e4       	ldi	r24, 0x42	; 66
+  a4:	0e 94 44 01 	call	0x288	; 0x288 <LED_init>
+  a8:	83 30       	cpi	r24, 0x03	; 3
+  aa:	19 f5       	brne	.+70     	; 0xf2 <Init+0x76>
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+	}
+	if (LED_init(W_LED_GREEN_PORT,W_LED_GREEN_PIN)==LED_INIT_OK)
+  ac:	61 e0       	ldi	r22, 0x01	; 1
+  ae:	82 e4       	ldi	r24, 0x42	; 66
+  b0:	0e 94 44 01 	call	0x288	; 0x288 <LED_init>
+  b4:	83 30       	cpi	r24, 0x03	; 3
+  b6:	f9 f4       	brne	.+62     	; 0xf6 <Init+0x7a>
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+	}
+	if (LED_init(W_LED_YELLOW_PORT,W_LED_YELLOW_PIN)==LED_INIT_OK)
+  b8:	62 e0       	ldi	r22, 0x02	; 2
+  ba:	82 e4       	ldi	r24, 0x42	; 66
+  bc:	0e 94 44 01 	call	0x288	; 0x288 <LED_init>
+  c0:	83 30       	cpi	r24, 0x03	; 3
+  c2:	d9 f4       	brne	.+54     	; 0xfa <Init+0x7e>
+	{
+		return INIT_APP_ERROR;
+	}
+	
+    //DIO_write(REQ_BUTTON_PIN,REQ_BUTTON_PORT,LOW);
+	if (BUTTON_init(REQ_BUTTON_PORT,REQ_BUTTON_PIN)==BUTTON_INIT_OK)
+  c4:	62 e0       	ldi	r22, 0x02	; 2
+  c6:	84 e4       	ldi	r24, 0x44	; 68
+  c8:	0e 94 0a 01 	call	0x214	; 0x214 <BUTTON_init>
+  cc:	83 30       	cpi	r24, 0x03	; 3
+  ce:	b9 f4       	brne	.+46     	; 0xfe <Init+0x82>
+	else
+	{
+		return INIT_APP_ERROR;
+	}
+	
+	Init_INTR_0();
+  d0:	0e 94 9e 03 	call	0x73c	; 0x73c <Init_INTR_0>
+	
+	LED_COLOR=GREEN;
+  d4:	81 e0       	ldi	r24, 0x01	; 1
+  d6:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <LED_COLOR>
+	FLAG=TRUE;
+  da:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <FLAG>
+	cycle=0;
+  de:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+	return INIT_APP_OK;
+  e2:	80 e0       	ldi	r24, 0x00	; 0
+  e4:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  e6:	81 e0       	ldi	r24, 0x01	; 1
+  e8:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  ea:	81 e0       	ldi	r24, 0x01	; 1
+  ec:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  ee:	81 e0       	ldi	r24, 0x01	; 1
+  f0:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  f2:	81 e0       	ldi	r24, 0x01	; 1
+  f4:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  f6:	81 e0       	ldi	r24, 0x01	; 1
+  f8:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  fa:	81 e0       	ldi	r24, 0x01	; 1
+  fc:	08 95       	ret
+	{
+		//Nothing
+	}
+	else
+	{
+		return INIT_APP_ERROR;
+  fe:	81 e0       	ldi	r24, 0x01	; 1
+	
+	LED_COLOR=GREEN;
+	FLAG=TRUE;
+	cycle=0;
+	return INIT_APP_OK;
+}
+ 100:	08 95       	ret
+
+00000102 <Loop>:
+{
+	// looping
+	
+	while(1)
+	{
+		if (FLAG==FALSE)
+ 102:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <FLAG>
+ 106:	81 11       	cpse	r24, r1
+ 108:	05 c0       	rjmp	.+10     	; 0x114 <Loop+0x12>
+			cycle++;
+ 10a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 10e:	8f 5f       	subi	r24, 0xFF	; 255
+ 110:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+		switch (LED_COLOR)
+ 114:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <LED_COLOR>
+ 118:	81 30       	cpi	r24, 0x01	; 1
+ 11a:	21 f0       	breq	.+8      	; 0x124 <Loop+0x22>
+ 11c:	c0 f1       	brcs	.+112    	; 0x18e <Loop+0x8c>
+ 11e:	82 30       	cpi	r24, 0x02	; 2
+ 120:	c9 f0       	breq	.+50     	; 0x154 <Loop+0x52>
+ 122:	4c c0       	rjmp	.+152    	; 0x1bc <Loop+0xba>
+			{
+				case GREEN:
+				{
+					LD_ST=YELLOW;
+ 124:	82 e0       	ldi	r24, 0x02	; 2
+ 126:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <LD_ST>
+					LED_on(T_LED_GREEN_PORT,T_LED_GREEN_PIN);
+ 12a:	61 e0       	ldi	r22, 0x01	; 1
+ 12c:	81 e4       	ldi	r24, 0x41	; 65
+ 12e:	0e 94 7e 01 	call	0x2fc	; 0x2fc <LED_on>
+					LED_on(W_LED_RED_PORT,W_LED_RED_PIN);
+ 132:	63 e0       	ldi	r22, 0x03	; 3
+ 134:	82 e4       	ldi	r24, 0x42	; 66
+ 136:	0e 94 7e 01 	call	0x2fc	; 0x2fc <LED_on>
+					TIMER_0_set(19531);  // 5 seconds
+ 13a:	8b e4       	ldi	r24, 0x4B	; 75
+ 13c:	9c e4       	ldi	r25, 0x4C	; 76
+ 13e:	0e 94 ac 03 	call	0x758	; 0x758 <TIMER_0_set>
+					LED_toggle(T_LED_GREEN_PORT,T_LED_GREEN_PIN);
+ 142:	61 e0       	ldi	r22, 0x01	; 1
+ 144:	81 e4       	ldi	r24, 0x41	; 65
+ 146:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <LED_toggle>
+					LED_toggle(W_LED_RED_PORT,W_LED_RED_PIN);
+ 14a:	63 e0       	ldi	r22, 0x03	; 3
+ 14c:	82 e4       	ldi	r24, 0x42	; 66
+ 14e:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <LED_toggle>
+					
+				}
+				break;
+ 152:	34 c0       	rjmp	.+104    	; 0x1bc <Loop+0xba>
+				
+				
+				case YELLOW:
+				{
+					LD_ST=RED;
+ 154:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <LD_ST>
+					int t=200;
+					LED_on(T_LED_YELLOW_PORT,T_LED_YELLOW_PIN);
+ 158:	62 e0       	ldi	r22, 0x02	; 2
+ 15a:	81 e4       	ldi	r24, 0x41	; 65
+ 15c:	0e 94 7e 01 	call	0x2fc	; 0x2fc <LED_on>
+				
+				
+				case YELLOW:
+				{
+					LD_ST=RED;
+					int t=200;
+ 160:	88 ec       	ldi	r24, 0xC8	; 200
+ 162:	90 e0       	ldi	r25, 0x00	; 0
+					LED_on(T_LED_YELLOW_PORT,T_LED_YELLOW_PIN);
+					while(t--)
+ 164:	07 c0       	rjmp	.+14     	; 0x174 <Loop+0x72>
+					{
+						LED_toggle_timer(W_LED_YELLOW_PORT,W_LED_YELLOW_PIN,97);
+ 166:	41 e6       	ldi	r20, 0x61	; 97
+ 168:	50 e0       	ldi	r21, 0x00	; 0
+ 16a:	62 e0       	ldi	r22, 0x02	; 2
+ 16c:	82 e4       	ldi	r24, 0x42	; 66
+ 16e:	0e 94 28 02 	call	0x450	; 0x450 <LED_toggle_timer>
+				case YELLOW:
+				{
+					LD_ST=RED;
+					int t=200;
+					LED_on(T_LED_YELLOW_PORT,T_LED_YELLOW_PIN);
+					while(t--)
+ 172:	ce 01       	movw	r24, r28
+ 174:	ec 01       	movw	r28, r24
+ 176:	21 97       	sbiw	r28, 0x01	; 1
+ 178:	89 2b       	or	r24, r25
+ 17a:	a9 f7       	brne	.-22     	; 0x166 <Loop+0x64>
+					{
+						LED_toggle_timer(W_LED_YELLOW_PORT,W_LED_YELLOW_PIN,97);
+					}
+					LED_toggle(T_LED_YELLOW_PORT,T_LED_YELLOW_PIN);
+ 17c:	62 e0       	ldi	r22, 0x02	; 2
+ 17e:	81 e4       	ldi	r24, 0x41	; 65
+ 180:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <LED_toggle>
+					LED_off(W_LED_YELLOW_PORT,W_LED_YELLOW_PIN);
+ 184:	62 e0       	ldi	r22, 0x02	; 2
+ 186:	82 e4       	ldi	r24, 0x42	; 66
+ 188:	0e 94 b8 01 	call	0x370	; 0x370 <LED_off>
+					
+				}
+				break;
+ 18c:	17 c0       	rjmp	.+46     	; 0x1bc <Loop+0xba>
+					
+				case RED:
+				{
+					LD_ST=GREEN;
+ 18e:	81 e0       	ldi	r24, 0x01	; 1
+ 190:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <LD_ST>
+					LED_on(T_LED_RED_PORT,T_LED_RED_PIN);
+ 194:	63 e0       	ldi	r22, 0x03	; 3
+ 196:	81 e4       	ldi	r24, 0x41	; 65
+ 198:	0e 94 7e 01 	call	0x2fc	; 0x2fc <LED_on>
+					LED_on(W_LED_GREEN_PORT,W_LED_GREEN_PIN);
+ 19c:	61 e0       	ldi	r22, 0x01	; 1
+ 19e:	82 e4       	ldi	r24, 0x42	; 66
+ 1a0:	0e 94 7e 01 	call	0x2fc	; 0x2fc <LED_on>
+					TIMER_0_set(19531);  // 5 seconds
+ 1a4:	8b e4       	ldi	r24, 0x4B	; 75
+ 1a6:	9c e4       	ldi	r25, 0x4C	; 76
+ 1a8:	0e 94 ac 03 	call	0x758	; 0x758 <TIMER_0_set>
+					LED_toggle(T_LED_RED_PORT,T_LED_RED_PIN);
+ 1ac:	63 e0       	ldi	r22, 0x03	; 3
+ 1ae:	81 e4       	ldi	r24, 0x41	; 65
+ 1b0:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <LED_toggle>
+					LED_toggle(W_LED_GREEN_PORT,W_LED_GREEN_PIN);
+ 1b4:	61 e0       	ldi	r22, 0x01	; 1
+ 1b6:	82 e4       	ldi	r24, 0x42	; 66
+ 1b8:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <LED_toggle>
+				default:
+				{
+					// ......Nothing .....
+				}
+			}
+		if((FLAG==FALSE)&&(cycle==3))
+ 1bc:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <FLAG>
+ 1c0:	81 11       	cpse	r24, r1
+ 1c2:	0d c0       	rjmp	.+26     	; 0x1de <Loop+0xdc>
+ 1c4:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1c8:	83 30       	cpi	r24, 0x03	; 3
+ 1ca:	49 f4       	brne	.+18     	; 0x1de <Loop+0xdc>
+		{
+			FLAG=TRUE;
+ 1cc:	81 e0       	ldi	r24, 0x01	; 1
+ 1ce:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <FLAG>
+			cycle=0;
+ 1d2:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+			Diable_G_INTRS();
+ 1d6:	0e 94 9c 03 	call	0x738	; 0x738 <Diable_G_INTRS>
+			Enable_G_INTRS();
+ 1da:	0e 94 9a 03 	call	0x734	; 0x734 <Enable_G_INTRS>
+		}
+			
+			
+		LED_COLOR=LD_ST;
+ 1de:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <LD_ST>
+ 1e2:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <LED_COLOR>
+		
+		
+	}
+ 1e6:	8d cf       	rjmp	.-230    	; 0x102 <Loop>
+
+000001e8 <APP_start>:
+}
+
+void APP_start(void)
+{
+	if (Init()==INIT_APP_OK)
+ 1e8:	0e 94 3e 00 	call	0x7c	; 0x7c <Init>
+ 1ec:	81 11       	cpse	r24, r1
+ 1ee:	02 c0       	rjmp	.+4      	; 0x1f4 <APP_start+0xc>
+	{
+		Loop();
+ 1f0:	0e 94 81 00 	call	0x102	; 0x102 <Loop>
+ 1f4:	08 95       	ret
+
+000001f6 <__vector_1>:
+
+
+
+
+ISR(EXT_TNT_0)
+{
+ 1f6:	1f 92       	push	r1
+ 1f8:	0f 92       	push	r0
+ 1fa:	0f b6       	in	r0, 0x3f	; 63
+ 1fc:	0f 92       	push	r0
+ 1fe:	11 24       	eor	r1, r1
+	FLAG=FALSE;
+ 200:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <FLAG>
+	LED_COLOR=LD_ST;
+ 204:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <LD_ST>
+ 208:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <LED_COLOR>
+	DIO_Reset();
+ 20c:	0e 94 95 03 	call	0x72a	; 0x72a <DIO_Reset>
+	
+	Loop();
+ 210:	0e 94 81 00 	call	0x102	; 0x102 <Loop>
+
+00000214 <BUTTON_init>:
+#include "BUtton.h"
+
+
+EN_BUTTON_ERROR BUTTON_init(uint8_t buttonPort,uint8_t buttonPin)
+{
+ 214:	96 2f       	mov	r25, r22
+	/*
+		skeleton :
+			This Function initialize the button (Make the DIO as an input)
+			It take button port and button pin as parameters and return Nothing
+	*/
+	switch (buttonPort)
+ 216:	82 34       	cpi	r24, 0x42	; 66
+ 218:	91 f0       	breq	.+36     	; 0x23e <BUTTON_init+0x2a>
+ 21a:	18 f4       	brcc	.+6      	; 0x222 <BUTTON_init+0xe>
+ 21c:	81 34       	cpi	r24, 0x41	; 65
+ 21e:	31 f0       	breq	.+12     	; 0x22c <BUTTON_init+0x18>
+ 220:	29 c0       	rjmp	.+82     	; 0x274 <BUTTON_init+0x60>
+ 222:	83 34       	cpi	r24, 0x43	; 67
+ 224:	a9 f0       	breq	.+42     	; 0x250 <BUTTON_init+0x3c>
+ 226:	84 34       	cpi	r24, 0x44	; 68
+ 228:	e1 f0       	breq	.+56     	; 0x262 <BUTTON_init+0x4e>
+ 22a:	24 c0       	rjmp	.+72     	; 0x274 <BUTTON_init+0x60>
+		{
+			case PORT_A:
+			{
+				if (buttonPin<0||buttonPin>7)
+ 22c:	68 30       	cpi	r22, 0x08	; 8
+ 22e:	20 f5       	brcc	.+72     	; 0x278 <BUTTON_init+0x64>
+				{
+					return BUTTON_PIN_ERROR;
+				}
+				else
+				{
+					DIO_init(buttonPin,buttonPort,IN);
+ 230:	40 e0       	ldi	r20, 0x00	; 0
+ 232:	68 2f       	mov	r22, r24
+ 234:	89 2f       	mov	r24, r25
+ 236:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+					return BUTTON_INIT_OK;
+ 23a:	83 e0       	ldi	r24, 0x03	; 3
+ 23c:	08 95       	ret
+				break;
+			}
+			
+			case PORT_B:
+			{
+				if (buttonPin<0||buttonPin>7)
+ 23e:	68 30       	cpi	r22, 0x08	; 8
+ 240:	e8 f4       	brcc	.+58     	; 0x27c <BUTTON_init+0x68>
+				{
+					return BUTTON_PIN_ERROR;
+				}
+				else
+				{
+					DIO_init(buttonPin,buttonPort,IN);
+ 242:	40 e0       	ldi	r20, 0x00	; 0
+ 244:	68 2f       	mov	r22, r24
+ 246:	89 2f       	mov	r24, r25
+ 248:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+					return BUTTON_INIT_OK;
+ 24c:	83 e0       	ldi	r24, 0x03	; 3
+ 24e:	08 95       	ret
+				break;
+			}
+			
+			case PORT_C:
+			{
+				if (buttonPin<0||buttonPin>7)
+ 250:	68 30       	cpi	r22, 0x08	; 8
+ 252:	b0 f4       	brcc	.+44     	; 0x280 <BUTTON_init+0x6c>
+				{
+					return BUTTON_PIN_ERROR;
+				}
+				else
+				{
+					DIO_init(buttonPin,buttonPort,IN);
+ 254:	40 e0       	ldi	r20, 0x00	; 0
+ 256:	68 2f       	mov	r22, r24
+ 258:	89 2f       	mov	r24, r25
+ 25a:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+					return BUTTON_INIT_OK;
+ 25e:	83 e0       	ldi	r24, 0x03	; 3
+ 260:	08 95       	ret
+				break;
+			}
+			
+			case PORT_D:
+			{
+				if (buttonPin<0||buttonPin>7)
+ 262:	68 30       	cpi	r22, 0x08	; 8
+ 264:	78 f4       	brcc	.+30     	; 0x284 <BUTTON_init+0x70>
+				{
+					return BUTTON_PIN_ERROR;
+				}
+				else
+				{
+					DIO_init(buttonPin,buttonPort,IN);
+ 266:	40 e0       	ldi	r20, 0x00	; 0
+ 268:	68 2f       	mov	r22, r24
+ 26a:	89 2f       	mov	r24, r25
+ 26c:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+					return BUTTON_INIT_OK;
+ 270:	83 e0       	ldi	r24, 0x03	; 3
+ 272:	08 95       	ret
+				break;
+			}
+			
+			default:
+			{
+				return BUTTON_PORT_ERROR;
+ 274:	81 e0       	ldi	r24, 0x01	; 1
+ 276:	08 95       	ret
+		{
+			case PORT_A:
+			{
+				if (buttonPin<0||buttonPin>7)
+				{
+					return BUTTON_PIN_ERROR;
+ 278:	82 e0       	ldi	r24, 0x02	; 2
+ 27a:	08 95       	ret
+			
+			case PORT_B:
+			{
+				if (buttonPin<0||buttonPin>7)
+				{
+					return BUTTON_PIN_ERROR;
+ 27c:	82 e0       	ldi	r24, 0x02	; 2
+ 27e:	08 95       	ret
+			
+			case PORT_C:
+			{
+				if (buttonPin<0||buttonPin>7)
+				{
+					return BUTTON_PIN_ERROR;
+ 280:	82 e0       	ldi	r24, 0x02	; 2
+ 282:	08 95       	ret
+			
+			case PORT_D:
+			{
+				if (buttonPin<0||buttonPin>7)
+				{
+					return BUTTON_PIN_ERROR;
+ 284:	82 e0       	ldi	r24, 0x02	; 2
+				break;
+			}
+		}
+				
+
+}
+ 286:	08 95       	ret
+
+00000288 <LED_init>:
+#include "LED.h"
+#include "../../MCAL/TIMERS/TIMER_0/TIMER_0.h"
+EN_LED_ERROR LED_init(uint8_t ledPort,uint8_t ledPin)
+{
+ 288:	96 2f       	mov	r25, r22
+		skeleton :
+			This Function initialize the Led (Make the DIO as an output)
+			It take led port and led pin as parameters and return LED_PORT_ERROR or LED_PIN_ERROR or LED_INIT_OK
+	*/
+	
+	switch (ledPort)
+ 28a:	82 34       	cpi	r24, 0x42	; 66
+ 28c:	91 f0       	breq	.+36     	; 0x2b2 <LED_init+0x2a>
+ 28e:	18 f4       	brcc	.+6      	; 0x296 <LED_init+0xe>
+ 290:	81 34       	cpi	r24, 0x41	; 65
+ 292:	31 f0       	breq	.+12     	; 0x2a0 <LED_init+0x18>
+ 294:	29 c0       	rjmp	.+82     	; 0x2e8 <LED_init+0x60>
+ 296:	83 34       	cpi	r24, 0x43	; 67
+ 298:	a9 f0       	breq	.+42     	; 0x2c4 <LED_init+0x3c>
+ 29a:	84 34       	cpi	r24, 0x44	; 68
+ 29c:	e1 f0       	breq	.+56     	; 0x2d6 <LED_init+0x4e>
+ 29e:	24 c0       	rjmp	.+72     	; 0x2e8 <LED_init+0x60>
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+ 2a0:	68 30       	cpi	r22, 0x08	; 8
+ 2a2:	20 f5       	brcc	.+72     	; 0x2ec <LED_init+0x64>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+				DIO_init(ledPin,ledPort,OUT);
+ 2a4:	41 e0       	ldi	r20, 0x01	; 1
+ 2a6:	68 2f       	mov	r22, r24
+ 2a8:	89 2f       	mov	r24, r25
+ 2aa:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+				return LED_INIT_OK;
+ 2ae:	83 e0       	ldi	r24, 0x03	; 3
+ 2b0:	08 95       	ret
+			break;
+		}
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+ 2b2:	68 30       	cpi	r22, 0x08	; 8
+ 2b4:	e8 f4       	brcc	.+58     	; 0x2f0 <LED_init+0x68>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+				DIO_init(ledPin,ledPort,OUT);
+ 2b6:	41 e0       	ldi	r20, 0x01	; 1
+ 2b8:	68 2f       	mov	r22, r24
+ 2ba:	89 2f       	mov	r24, r25
+ 2bc:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+				return LED_INIT_OK;
+ 2c0:	83 e0       	ldi	r24, 0x03	; 3
+ 2c2:	08 95       	ret
+			break;
+		}
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+ 2c4:	68 30       	cpi	r22, 0x08	; 8
+ 2c6:	b0 f4       	brcc	.+44     	; 0x2f4 <LED_init+0x6c>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+				DIO_init(ledPin,ledPort,OUT);
+ 2c8:	41 e0       	ldi	r20, 0x01	; 1
+ 2ca:	68 2f       	mov	r22, r24
+ 2cc:	89 2f       	mov	r24, r25
+ 2ce:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+				return LED_INIT_OK;
+ 2d2:	83 e0       	ldi	r24, 0x03	; 3
+ 2d4:	08 95       	ret
+			break;
+		}
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+ 2d6:	68 30       	cpi	r22, 0x08	; 8
+ 2d8:	78 f4       	brcc	.+30     	; 0x2f8 <LED_init+0x70>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+				DIO_init(ledPin,ledPort,OUT);
+ 2da:	41 e0       	ldi	r20, 0x01	; 1
+ 2dc:	68 2f       	mov	r22, r24
+ 2de:	89 2f       	mov	r24, r25
+ 2e0:	0e 94 40 02 	call	0x480	; 0x480 <DIO_init>
+				return LED_INIT_OK;
+ 2e4:	83 e0       	ldi	r24, 0x03	; 3
+ 2e6:	08 95       	ret
+			break;
+		}
+		
+		default:
+		{
+			return LED_PORT_ERROR;
+ 2e8:	81 e0       	ldi	r24, 0x01	; 1
+ 2ea:	08 95       	ret
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 2ec:	82 e0       	ldi	r24, 0x02	; 2
+ 2ee:	08 95       	ret
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 2f0:	82 e0       	ldi	r24, 0x02	; 2
+ 2f2:	08 95       	ret
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 2f4:	82 e0       	ldi	r24, 0x02	; 2
+ 2f6:	08 95       	ret
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 2f8:	82 e0       	ldi	r24, 0x02	; 2
+			break;
+		}
+		
+	}
+    
+}
+ 2fa:	08 95       	ret
+
+000002fc <LED_on>:
+
+
+EN_LED_ERROR LED_on(uint8_t ledPort,uint8_t ledPin)
+{
+ 2fc:	96 2f       	mov	r25, r22
+		skeleton :
+			This Function make the Led on
+			It take led port and led pin as parameters and return LED_OK or LED_PORT_ERROR or LED_PIN_ERROR
+	*/
+	
+	switch (ledPort)
+ 2fe:	82 34       	cpi	r24, 0x42	; 66
+ 300:	91 f0       	breq	.+36     	; 0x326 <LED_on+0x2a>
+ 302:	18 f4       	brcc	.+6      	; 0x30a <LED_on+0xe>
+ 304:	81 34       	cpi	r24, 0x41	; 65
+ 306:	31 f0       	breq	.+12     	; 0x314 <LED_on+0x18>
+ 308:	29 c0       	rjmp	.+82     	; 0x35c <LED_on+0x60>
+ 30a:	83 34       	cpi	r24, 0x43	; 67
+ 30c:	a9 f0       	breq	.+42     	; 0x338 <LED_on+0x3c>
+ 30e:	84 34       	cpi	r24, 0x44	; 68
+ 310:	e1 f0       	breq	.+56     	; 0x34a <LED_on+0x4e>
+ 312:	24 c0       	rjmp	.+72     	; 0x35c <LED_on+0x60>
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+ 314:	68 30       	cpi	r22, 0x08	; 8
+ 316:	20 f5       	brcc	.+72     	; 0x360 <LED_on+0x64>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,HIGH);
+ 318:	41 e0       	ldi	r20, 0x01	; 1
+ 31a:	68 2f       	mov	r22, r24
+ 31c:	89 2f       	mov	r24, r25
+ 31e:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 322:	80 e0       	ldi	r24, 0x00	; 0
+ 324:	08 95       	ret
+			break;
+		}
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+ 326:	68 30       	cpi	r22, 0x08	; 8
+ 328:	e8 f4       	brcc	.+58     	; 0x364 <LED_on+0x68>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,HIGH);
+ 32a:	41 e0       	ldi	r20, 0x01	; 1
+ 32c:	68 2f       	mov	r22, r24
+ 32e:	89 2f       	mov	r24, r25
+ 330:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 334:	80 e0       	ldi	r24, 0x00	; 0
+ 336:	08 95       	ret
+			break;
+		}
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+ 338:	68 30       	cpi	r22, 0x08	; 8
+ 33a:	b0 f4       	brcc	.+44     	; 0x368 <LED_on+0x6c>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,HIGH);
+ 33c:	41 e0       	ldi	r20, 0x01	; 1
+ 33e:	68 2f       	mov	r22, r24
+ 340:	89 2f       	mov	r24, r25
+ 342:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 346:	80 e0       	ldi	r24, 0x00	; 0
+ 348:	08 95       	ret
+			break;
+		}
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+ 34a:	68 30       	cpi	r22, 0x08	; 8
+ 34c:	78 f4       	brcc	.+30     	; 0x36c <LED_on+0x70>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,HIGH);
+ 34e:	41 e0       	ldi	r20, 0x01	; 1
+ 350:	68 2f       	mov	r22, r24
+ 352:	89 2f       	mov	r24, r25
+ 354:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 358:	80 e0       	ldi	r24, 0x00	; 0
+ 35a:	08 95       	ret
+			break;
+		}
+		
+		default:
+		{
+			return LED_PORT_ERROR;
+ 35c:	81 e0       	ldi	r24, 0x01	; 1
+ 35e:	08 95       	ret
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 360:	82 e0       	ldi	r24, 0x02	; 2
+ 362:	08 95       	ret
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 364:	82 e0       	ldi	r24, 0x02	; 2
+ 366:	08 95       	ret
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 368:	82 e0       	ldi	r24, 0x02	; 2
+ 36a:	08 95       	ret
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 36c:	82 e0       	ldi	r24, 0x02	; 2
+			break;
+		}
+		
+	}
+	
+}
+ 36e:	08 95       	ret
+
+00000370 <LED_off>:
+
+
+EN_LED_ERROR LED_off(uint8_t ledPort,uint8_t ledPin)
+{
+ 370:	96 2f       	mov	r25, r22
+		skeleton :
+			This Function make the Led off
+			It take led port and led pin as parameters and return LED_OK or LED_PORT_ERROR or LED_PIN_ERROR
+	*/
+
+	switch (ledPort)
+ 372:	82 34       	cpi	r24, 0x42	; 66
+ 374:	91 f0       	breq	.+36     	; 0x39a <LED_off+0x2a>
+ 376:	18 f4       	brcc	.+6      	; 0x37e <LED_off+0xe>
+ 378:	81 34       	cpi	r24, 0x41	; 65
+ 37a:	31 f0       	breq	.+12     	; 0x388 <LED_off+0x18>
+ 37c:	29 c0       	rjmp	.+82     	; 0x3d0 <LED_off+0x60>
+ 37e:	83 34       	cpi	r24, 0x43	; 67
+ 380:	a9 f0       	breq	.+42     	; 0x3ac <LED_off+0x3c>
+ 382:	84 34       	cpi	r24, 0x44	; 68
+ 384:	e1 f0       	breq	.+56     	; 0x3be <LED_off+0x4e>
+ 386:	24 c0       	rjmp	.+72     	; 0x3d0 <LED_off+0x60>
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+ 388:	68 30       	cpi	r22, 0x08	; 8
+ 38a:	20 f5       	brcc	.+72     	; 0x3d4 <LED_off+0x64>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,LOW);
+ 38c:	40 e0       	ldi	r20, 0x00	; 0
+ 38e:	68 2f       	mov	r22, r24
+ 390:	89 2f       	mov	r24, r25
+ 392:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 396:	80 e0       	ldi	r24, 0x00	; 0
+ 398:	08 95       	ret
+			break;
+		}
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+ 39a:	68 30       	cpi	r22, 0x08	; 8
+ 39c:	e8 f4       	brcc	.+58     	; 0x3d8 <LED_off+0x68>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,LOW);
+ 39e:	40 e0       	ldi	r20, 0x00	; 0
+ 3a0:	68 2f       	mov	r22, r24
+ 3a2:	89 2f       	mov	r24, r25
+ 3a4:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 3a8:	80 e0       	ldi	r24, 0x00	; 0
+ 3aa:	08 95       	ret
+			break;
+		}
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+ 3ac:	68 30       	cpi	r22, 0x08	; 8
+ 3ae:	b0 f4       	brcc	.+44     	; 0x3dc <LED_off+0x6c>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,LOW);
+ 3b0:	40 e0       	ldi	r20, 0x00	; 0
+ 3b2:	68 2f       	mov	r22, r24
+ 3b4:	89 2f       	mov	r24, r25
+ 3b6:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 3ba:	80 e0       	ldi	r24, 0x00	; 0
+ 3bc:	08 95       	ret
+			break;
+		}
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+ 3be:	68 30       	cpi	r22, 0x08	; 8
+ 3c0:	78 f4       	brcc	.+30     	; 0x3e0 <LED_off+0x70>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_write(ledPin,ledPort,LOW);
+ 3c2:	40 e0       	ldi	r20, 0x00	; 0
+ 3c4:	68 2f       	mov	r22, r24
+ 3c6:	89 2f       	mov	r24, r25
+ 3c8:	0e 94 cb 02 	call	0x596	; 0x596 <DIO_write>
+			return LED_OK;
+ 3cc:	80 e0       	ldi	r24, 0x00	; 0
+ 3ce:	08 95       	ret
+			break;
+		}
+		
+		default:
+		{
+			return LED_PORT_ERROR;
+ 3d0:	81 e0       	ldi	r24, 0x01	; 1
+ 3d2:	08 95       	ret
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 3d4:	82 e0       	ldi	r24, 0x02	; 2
+ 3d6:	08 95       	ret
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 3d8:	82 e0       	ldi	r24, 0x02	; 2
+ 3da:	08 95       	ret
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 3dc:	82 e0       	ldi	r24, 0x02	; 2
+ 3de:	08 95       	ret
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 3e0:	82 e0       	ldi	r24, 0x02	; 2
+		
+	}
+	
+
+	   
+}
+ 3e2:	08 95       	ret
+
+000003e4 <LED_toggle>:
+
+
+EN_LED_ERROR LED_toggle(uint8_t ledPort,uint8_t ledPin)
+{
+ 3e4:	96 2f       	mov	r25, r22
+		skeleton :
+			This Function toggle the Led state
+			It take led port and led pin as parameters and return LED_OK or LED_PORT_ERROR or LED_PIN_ERROR
+	*/
+
+	switch (ledPort)
+ 3e6:	82 34       	cpi	r24, 0x42	; 66
+ 3e8:	89 f0       	breq	.+34     	; 0x40c <__EEPROM_REGION_LENGTH__+0xc>
+ 3ea:	18 f4       	brcc	.+6      	; 0x3f2 <LED_toggle+0xe>
+ 3ec:	81 34       	cpi	r24, 0x41	; 65
+ 3ee:	31 f0       	breq	.+12     	; 0x3fc <LED_toggle+0x18>
+ 3f0:	25 c0       	rjmp	.+74     	; 0x43c <__EEPROM_REGION_LENGTH__+0x3c>
+ 3f2:	83 34       	cpi	r24, 0x43	; 67
+ 3f4:	99 f0       	breq	.+38     	; 0x41c <__EEPROM_REGION_LENGTH__+0x1c>
+ 3f6:	84 34       	cpi	r24, 0x44	; 68
+ 3f8:	c9 f0       	breq	.+50     	; 0x42c <__EEPROM_REGION_LENGTH__+0x2c>
+ 3fa:	20 c0       	rjmp	.+64     	; 0x43c <__EEPROM_REGION_LENGTH__+0x3c>
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+ 3fc:	68 30       	cpi	r22, 0x08	; 8
+ 3fe:	00 f5       	brcc	.+64     	; 0x440 <__EEPROM_REGION_LENGTH__+0x40>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_toggle( ledPin,ledPort);
+ 400:	68 2f       	mov	r22, r24
+ 402:	89 2f       	mov	r24, r25
+ 404:	0e 94 56 03 	call	0x6ac	; 0x6ac <DIO_toggle>
+			return LED_OK;
+ 408:	80 e0       	ldi	r24, 0x00	; 0
+ 40a:	08 95       	ret
+			break;
+		}
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+ 40c:	68 30       	cpi	r22, 0x08	; 8
+ 40e:	d0 f4       	brcc	.+52     	; 0x444 <__EEPROM_REGION_LENGTH__+0x44>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_toggle( ledPin,ledPort);
+ 410:	68 2f       	mov	r22, r24
+ 412:	89 2f       	mov	r24, r25
+ 414:	0e 94 56 03 	call	0x6ac	; 0x6ac <DIO_toggle>
+			return LED_OK;
+ 418:	80 e0       	ldi	r24, 0x00	; 0
+ 41a:	08 95       	ret
+			break;
+		}
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+ 41c:	68 30       	cpi	r22, 0x08	; 8
+ 41e:	a0 f4       	brcc	.+40     	; 0x448 <__EEPROM_REGION_LENGTH__+0x48>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_toggle( ledPin,ledPort);
+ 420:	68 2f       	mov	r22, r24
+ 422:	89 2f       	mov	r24, r25
+ 424:	0e 94 56 03 	call	0x6ac	; 0x6ac <DIO_toggle>
+			return LED_OK;
+ 428:	80 e0       	ldi	r24, 0x00	; 0
+ 42a:	08 95       	ret
+			break;
+		}
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+ 42c:	68 30       	cpi	r22, 0x08	; 8
+ 42e:	70 f4       	brcc	.+28     	; 0x44c <__EEPROM_REGION_LENGTH__+0x4c>
+			{
+				return LED_PIN_ERROR;
+			}
+			else
+			{
+			DIO_toggle( ledPin,ledPort);
+ 430:	68 2f       	mov	r22, r24
+ 432:	89 2f       	mov	r24, r25
+ 434:	0e 94 56 03 	call	0x6ac	; 0x6ac <DIO_toggle>
+			return LED_OK;
+ 438:	80 e0       	ldi	r24, 0x00	; 0
+ 43a:	08 95       	ret
+			break;
+		}
+		
+		default:
+		{
+			return LED_PORT_ERROR;
+ 43c:	81 e0       	ldi	r24, 0x01	; 1
+ 43e:	08 95       	ret
+	{
+		case PORT_A:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 440:	82 e0       	ldi	r24, 0x02	; 2
+ 442:	08 95       	ret
+		
+		case PORT_B:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 444:	82 e0       	ldi	r24, 0x02	; 2
+ 446:	08 95       	ret
+		
+		case PORT_C:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 448:	82 e0       	ldi	r24, 0x02	; 2
+ 44a:	08 95       	ret
+		
+		case PORT_D:
+		{
+			if (ledPin<0||ledPin>7)
+			{
+				return LED_PIN_ERROR;
+ 44c:	82 e0       	ldi	r24, 0x02	; 2
+			break;
+		}
+		
+	}
+	  
+}
+ 44e:	08 95       	ret
+
+00000450 <LED_toggle_timer>:
+
+
+EN_LED_ERROR LED_toggle_timer(uint8_t ledPort,uint8_t ledPin,uint32_t overflow)
+{
+ 450:	0f 93       	push	r16
+ 452:	1f 93       	push	r17
+ 454:	cf 93       	push	r28
+ 456:	8a 01       	movw	r16, r20
+		skeleton :
+			This Function toggle the Led state for period of time
+			It take led port and led pin and number of overflows(time) as parameters and return LED_OK or LED_PORT_ERROR or LED_PIN_ERROR
+	*/
+	
+	if (LED_toggle(ledPort,ledPin)==LED_OK)
+ 458:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <LED_toggle>
+ 45c:	c8 2f       	mov	r28, r24
+ 45e:	81 11       	cpse	r24, r1
+ 460:	04 c0       	rjmp	.+8      	; 0x46a <LED_toggle_timer+0x1a>
+	{
+		TIMER_0_set(overflow);
+ 462:	c8 01       	movw	r24, r16
+ 464:	0e 94 ac 03 	call	0x758	; 0x758 <TIMER_0_set>
+		return LED_OK;
+ 468:	01 c0       	rjmp	.+2      	; 0x46c <LED_toggle_timer+0x1c>
+	}
+	else
+	{
+		return LED_TOGGLE_TIMER_ERROR;
+ 46a:	c4 e0       	ldi	r28, 0x04	; 4
+	}
+	
+ 46c:	8c 2f       	mov	r24, r28
+ 46e:	cf 91       	pop	r28
+ 470:	1f 91       	pop	r17
+ 472:	0f 91       	pop	r16
+ 474:	08 95       	ret
+
+00000476 <main>:
+//#include "MCAL/INTERRUPTS/INTR_0_TEST.h"
+//#include "MCAL/TIMERS/TIMER_0/TIMER_0_TEST.h"
+//#include "ECUAL/LED_Driver/LED_TEST.h"
+//#include "ECUAL/BUTTON_Driver/BUTTON_TEST.h"
+int main() {
+APP_start();
+ 476:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <APP_start>
+	//INTR_0_Test();
+	//Timer_0_Test();
+	//Led_Test();
+	//Button_Test();
+	return 0;
+}
+ 47a:	80 e0       	ldi	r24, 0x00	; 0
+ 47c:	90 e0       	ldi	r25, 0x00	; 0
+ 47e:	08 95       	ret
+
+00000480 <DIO_init>:
+            break;
+        case PORT_C:
+            *value=(PINC&(1<<pinNumber))>>pinNumber;
+            break;
+        case PORT_D:
+            *value=(PIND&(1<<pinNumber))>>pinNumber;
+ 480:	62 34       	cpi	r22, 0x42	; 66
+ 482:	59 f1       	breq	.+86     	; 0x4da <DIO_init+0x5a>
+ 484:	18 f4       	brcc	.+6      	; 0x48c <DIO_init+0xc>
+ 486:	61 34       	cpi	r22, 0x41	; 65
+ 488:	41 f0       	breq	.+16     	; 0x49a <DIO_init+0x1a>
+ 48a:	08 95       	ret
+ 48c:	63 34       	cpi	r22, 0x43	; 67
+ 48e:	09 f4       	brne	.+2      	; 0x492 <DIO_init+0x12>
+ 490:	44 c0       	rjmp	.+136    	; 0x51a <DIO_init+0x9a>
+ 492:	64 34       	cpi	r22, 0x44	; 68
+ 494:	09 f4       	brne	.+2      	; 0x498 <DIO_init+0x18>
+ 496:	60 c0       	rjmp	.+192    	; 0x558 <DIO_init+0xd8>
+ 498:	08 95       	ret
+ 49a:	41 11       	cpse	r20, r1
+ 49c:	0e c0       	rjmp	.+28     	; 0x4ba <DIO_init+0x3a>
+ 49e:	4a b3       	in	r20, 0x1a	; 26
+ 4a0:	21 e0       	ldi	r18, 0x01	; 1
+ 4a2:	30 e0       	ldi	r19, 0x00	; 0
+ 4a4:	b9 01       	movw	r22, r18
+ 4a6:	02 c0       	rjmp	.+4      	; 0x4ac <DIO_init+0x2c>
+ 4a8:	66 0f       	add	r22, r22
+ 4aa:	77 1f       	adc	r23, r23
+ 4ac:	8a 95       	dec	r24
+ 4ae:	e2 f7       	brpl	.-8      	; 0x4a8 <DIO_init+0x28>
+ 4b0:	cb 01       	movw	r24, r22
+ 4b2:	80 95       	com	r24
+ 4b4:	84 23       	and	r24, r20
+ 4b6:	8a bb       	out	0x1a, r24	; 26
+ 4b8:	08 95       	ret
+ 4ba:	41 30       	cpi	r20, 0x01	; 1
+ 4bc:	09 f0       	breq	.+2      	; 0x4c0 <DIO_init+0x40>
+ 4be:	6a c0       	rjmp	.+212    	; 0x594 <DIO_init+0x114>
+ 4c0:	4a b3       	in	r20, 0x1a	; 26
+ 4c2:	21 e0       	ldi	r18, 0x01	; 1
+ 4c4:	30 e0       	ldi	r19, 0x00	; 0
+ 4c6:	b9 01       	movw	r22, r18
+ 4c8:	02 c0       	rjmp	.+4      	; 0x4ce <DIO_init+0x4e>
+ 4ca:	66 0f       	add	r22, r22
+ 4cc:	77 1f       	adc	r23, r23
+ 4ce:	8a 95       	dec	r24
+ 4d0:	e2 f7       	brpl	.-8      	; 0x4ca <DIO_init+0x4a>
+ 4d2:	cb 01       	movw	r24, r22
+ 4d4:	84 2b       	or	r24, r20
+ 4d6:	8a bb       	out	0x1a, r24	; 26
+ 4d8:	08 95       	ret
+ 4da:	41 11       	cpse	r20, r1
+ 4dc:	0e c0       	rjmp	.+28     	; 0x4fa <DIO_init+0x7a>
+ 4de:	47 b3       	in	r20, 0x17	; 23
+ 4e0:	21 e0       	ldi	r18, 0x01	; 1
+ 4e2:	30 e0       	ldi	r19, 0x00	; 0
+ 4e4:	b9 01       	movw	r22, r18
+ 4e6:	02 c0       	rjmp	.+4      	; 0x4ec <DIO_init+0x6c>
+ 4e8:	66 0f       	add	r22, r22
+ 4ea:	77 1f       	adc	r23, r23
+ 4ec:	8a 95       	dec	r24
+ 4ee:	e2 f7       	brpl	.-8      	; 0x4e8 <DIO_init+0x68>
+ 4f0:	cb 01       	movw	r24, r22
+ 4f2:	80 95       	com	r24
+ 4f4:	84 23       	and	r24, r20
+ 4f6:	87 bb       	out	0x17, r24	; 23
+ 4f8:	08 95       	ret
+ 4fa:	41 30       	cpi	r20, 0x01	; 1
+ 4fc:	09 f0       	breq	.+2      	; 0x500 <DIO_init+0x80>
+ 4fe:	4a c0       	rjmp	.+148    	; 0x594 <DIO_init+0x114>
+ 500:	47 b3       	in	r20, 0x17	; 23
+ 502:	21 e0       	ldi	r18, 0x01	; 1
+ 504:	30 e0       	ldi	r19, 0x00	; 0
+ 506:	b9 01       	movw	r22, r18
+ 508:	02 c0       	rjmp	.+4      	; 0x50e <DIO_init+0x8e>
+ 50a:	66 0f       	add	r22, r22
+ 50c:	77 1f       	adc	r23, r23
+ 50e:	8a 95       	dec	r24
+ 510:	e2 f7       	brpl	.-8      	; 0x50a <DIO_init+0x8a>
+ 512:	cb 01       	movw	r24, r22
+ 514:	84 2b       	or	r24, r20
+ 516:	87 bb       	out	0x17, r24	; 23
+ 518:	08 95       	ret
+ 51a:	41 11       	cpse	r20, r1
+ 51c:	0e c0       	rjmp	.+28     	; 0x53a <DIO_init+0xba>
+ 51e:	44 b3       	in	r20, 0x14	; 20
+ 520:	21 e0       	ldi	r18, 0x01	; 1
+ 522:	30 e0       	ldi	r19, 0x00	; 0
+ 524:	b9 01       	movw	r22, r18
+ 526:	02 c0       	rjmp	.+4      	; 0x52c <DIO_init+0xac>
+ 528:	66 0f       	add	r22, r22
+ 52a:	77 1f       	adc	r23, r23
+ 52c:	8a 95       	dec	r24
+ 52e:	e2 f7       	brpl	.-8      	; 0x528 <DIO_init+0xa8>
+ 530:	cb 01       	movw	r24, r22
+ 532:	80 95       	com	r24
+ 534:	84 23       	and	r24, r20
+ 536:	84 bb       	out	0x14, r24	; 20
+ 538:	08 95       	ret
+ 53a:	41 30       	cpi	r20, 0x01	; 1
+ 53c:	59 f5       	brne	.+86     	; 0x594 <DIO_init+0x114>
+ 53e:	44 b3       	in	r20, 0x14	; 20
+ 540:	21 e0       	ldi	r18, 0x01	; 1
+ 542:	30 e0       	ldi	r19, 0x00	; 0
+ 544:	b9 01       	movw	r22, r18
+ 546:	02 c0       	rjmp	.+4      	; 0x54c <DIO_init+0xcc>
+ 548:	66 0f       	add	r22, r22
+ 54a:	77 1f       	adc	r23, r23
+ 54c:	8a 95       	dec	r24
+ 54e:	e2 f7       	brpl	.-8      	; 0x548 <DIO_init+0xc8>
+ 550:	cb 01       	movw	r24, r22
+ 552:	84 2b       	or	r24, r20
+ 554:	84 bb       	out	0x14, r24	; 20
+ 556:	08 95       	ret
+ 558:	41 11       	cpse	r20, r1
+ 55a:	0e c0       	rjmp	.+28     	; 0x578 <DIO_init+0xf8>
+ 55c:	41 b3       	in	r20, 0x11	; 17
+ 55e:	21 e0       	ldi	r18, 0x01	; 1
+ 560:	30 e0       	ldi	r19, 0x00	; 0
+ 562:	b9 01       	movw	r22, r18
+ 564:	02 c0       	rjmp	.+4      	; 0x56a <DIO_init+0xea>
+ 566:	66 0f       	add	r22, r22
+ 568:	77 1f       	adc	r23, r23
+ 56a:	8a 95       	dec	r24
+ 56c:	e2 f7       	brpl	.-8      	; 0x566 <DIO_init+0xe6>
+ 56e:	cb 01       	movw	r24, r22
+ 570:	80 95       	com	r24
+ 572:	84 23       	and	r24, r20
+ 574:	81 bb       	out	0x11, r24	; 17
+ 576:	08 95       	ret
+ 578:	41 30       	cpi	r20, 0x01	; 1
+ 57a:	61 f4       	brne	.+24     	; 0x594 <DIO_init+0x114>
+ 57c:	41 b3       	in	r20, 0x11	; 17
+ 57e:	21 e0       	ldi	r18, 0x01	; 1
+ 580:	30 e0       	ldi	r19, 0x00	; 0
+ 582:	b9 01       	movw	r22, r18
+ 584:	02 c0       	rjmp	.+4      	; 0x58a <DIO_init+0x10a>
+ 586:	66 0f       	add	r22, r22
+ 588:	77 1f       	adc	r23, r23
+ 58a:	8a 95       	dec	r24
+ 58c:	e2 f7       	brpl	.-8      	; 0x586 <DIO_init+0x106>
+ 58e:	cb 01       	movw	r24, r22
+ 590:	84 2b       	or	r24, r20
+ 592:	81 bb       	out	0x11, r24	; 17
+ 594:	08 95       	ret
+
+00000596 <DIO_write>:
+ 596:	62 34       	cpi	r22, 0x42	; 66
+ 598:	59 f1       	breq	.+86     	; 0x5f0 <DIO_write+0x5a>
+ 59a:	18 f4       	brcc	.+6      	; 0x5a2 <DIO_write+0xc>
+ 59c:	61 34       	cpi	r22, 0x41	; 65
+ 59e:	41 f0       	breq	.+16     	; 0x5b0 <DIO_write+0x1a>
+ 5a0:	08 95       	ret
+ 5a2:	63 34       	cpi	r22, 0x43	; 67
+ 5a4:	09 f4       	brne	.+2      	; 0x5a8 <DIO_write+0x12>
+ 5a6:	44 c0       	rjmp	.+136    	; 0x630 <DIO_write+0x9a>
+ 5a8:	64 34       	cpi	r22, 0x44	; 68
+ 5aa:	09 f4       	brne	.+2      	; 0x5ae <DIO_write+0x18>
+ 5ac:	60 c0       	rjmp	.+192    	; 0x66e <DIO_write+0xd8>
+ 5ae:	08 95       	ret
+ 5b0:	41 11       	cpse	r20, r1
+ 5b2:	0e c0       	rjmp	.+28     	; 0x5d0 <DIO_write+0x3a>
+ 5b4:	4b b3       	in	r20, 0x1b	; 27
+ 5b6:	21 e0       	ldi	r18, 0x01	; 1
+ 5b8:	30 e0       	ldi	r19, 0x00	; 0
+ 5ba:	b9 01       	movw	r22, r18
+ 5bc:	02 c0       	rjmp	.+4      	; 0x5c2 <DIO_write+0x2c>
+ 5be:	66 0f       	add	r22, r22
+ 5c0:	77 1f       	adc	r23, r23
+ 5c2:	8a 95       	dec	r24
+ 5c4:	e2 f7       	brpl	.-8      	; 0x5be <DIO_write+0x28>
+ 5c6:	cb 01       	movw	r24, r22
+ 5c8:	80 95       	com	r24
+ 5ca:	84 23       	and	r24, r20
+ 5cc:	8b bb       	out	0x1b, r24	; 27
+ 5ce:	08 95       	ret
+ 5d0:	41 30       	cpi	r20, 0x01	; 1
+ 5d2:	09 f0       	breq	.+2      	; 0x5d6 <DIO_write+0x40>
+ 5d4:	6a c0       	rjmp	.+212    	; 0x6aa <DIO_write+0x114>
+ 5d6:	4b b3       	in	r20, 0x1b	; 27
+ 5d8:	21 e0       	ldi	r18, 0x01	; 1
+ 5da:	30 e0       	ldi	r19, 0x00	; 0
+ 5dc:	b9 01       	movw	r22, r18
+ 5de:	02 c0       	rjmp	.+4      	; 0x5e4 <DIO_write+0x4e>
+ 5e0:	66 0f       	add	r22, r22
+ 5e2:	77 1f       	adc	r23, r23
+ 5e4:	8a 95       	dec	r24
+ 5e6:	e2 f7       	brpl	.-8      	; 0x5e0 <DIO_write+0x4a>
+ 5e8:	cb 01       	movw	r24, r22
+ 5ea:	84 2b       	or	r24, r20
+ 5ec:	8b bb       	out	0x1b, r24	; 27
+ 5ee:	08 95       	ret
+ 5f0:	41 11       	cpse	r20, r1
+ 5f2:	0e c0       	rjmp	.+28     	; 0x610 <DIO_write+0x7a>
+ 5f4:	48 b3       	in	r20, 0x18	; 24
+ 5f6:	21 e0       	ldi	r18, 0x01	; 1
+ 5f8:	30 e0       	ldi	r19, 0x00	; 0
+ 5fa:	b9 01       	movw	r22, r18
+ 5fc:	02 c0       	rjmp	.+4      	; 0x602 <DIO_write+0x6c>
+ 5fe:	66 0f       	add	r22, r22
+ 600:	77 1f       	adc	r23, r23
+ 602:	8a 95       	dec	r24
+ 604:	e2 f7       	brpl	.-8      	; 0x5fe <DIO_write+0x68>
+ 606:	cb 01       	movw	r24, r22
+ 608:	80 95       	com	r24
+ 60a:	84 23       	and	r24, r20
+ 60c:	88 bb       	out	0x18, r24	; 24
+ 60e:	08 95       	ret
+ 610:	41 30       	cpi	r20, 0x01	; 1
+ 612:	09 f0       	breq	.+2      	; 0x616 <DIO_write+0x80>
+ 614:	4a c0       	rjmp	.+148    	; 0x6aa <DIO_write+0x114>
+ 616:	48 b3       	in	r20, 0x18	; 24
+ 618:	21 e0       	ldi	r18, 0x01	; 1
+ 61a:	30 e0       	ldi	r19, 0x00	; 0
+ 61c:	b9 01       	movw	r22, r18
+ 61e:	02 c0       	rjmp	.+4      	; 0x624 <DIO_write+0x8e>
+ 620:	66 0f       	add	r22, r22
+ 622:	77 1f       	adc	r23, r23
+ 624:	8a 95       	dec	r24
+ 626:	e2 f7       	brpl	.-8      	; 0x620 <DIO_write+0x8a>
+ 628:	cb 01       	movw	r24, r22
+ 62a:	84 2b       	or	r24, r20
+ 62c:	88 bb       	out	0x18, r24	; 24
+ 62e:	08 95       	ret
+ 630:	41 11       	cpse	r20, r1
+ 632:	0e c0       	rjmp	.+28     	; 0x650 <DIO_write+0xba>
+ 634:	45 b3       	in	r20, 0x15	; 21
+ 636:	21 e0       	ldi	r18, 0x01	; 1
+ 638:	30 e0       	ldi	r19, 0x00	; 0
+ 63a:	b9 01       	movw	r22, r18
+ 63c:	02 c0       	rjmp	.+4      	; 0x642 <DIO_write+0xac>
+ 63e:	66 0f       	add	r22, r22
+ 640:	77 1f       	adc	r23, r23
+ 642:	8a 95       	dec	r24
+ 644:	e2 f7       	brpl	.-8      	; 0x63e <DIO_write+0xa8>
+ 646:	cb 01       	movw	r24, r22
+ 648:	80 95       	com	r24
+ 64a:	84 23       	and	r24, r20
+ 64c:	85 bb       	out	0x15, r24	; 21
+ 64e:	08 95       	ret
+ 650:	41 30       	cpi	r20, 0x01	; 1
+ 652:	59 f5       	brne	.+86     	; 0x6aa <DIO_write+0x114>
+ 654:	45 b3       	in	r20, 0x15	; 21
+ 656:	21 e0       	ldi	r18, 0x01	; 1
+ 658:	30 e0       	ldi	r19, 0x00	; 0
+ 65a:	b9 01       	movw	r22, r18
+ 65c:	02 c0       	rjmp	.+4      	; 0x662 <DIO_write+0xcc>
+ 65e:	66 0f       	add	r22, r22
+ 660:	77 1f       	adc	r23, r23
+ 662:	8a 95       	dec	r24
+ 664:	e2 f7       	brpl	.-8      	; 0x65e <DIO_write+0xc8>
+ 666:	cb 01       	movw	r24, r22
+ 668:	84 2b       	or	r24, r20
+ 66a:	85 bb       	out	0x15, r24	; 21
+ 66c:	08 95       	ret
+ 66e:	41 11       	cpse	r20, r1
+ 670:	0e c0       	rjmp	.+28     	; 0x68e <DIO_write+0xf8>
+ 672:	42 b3       	in	r20, 0x12	; 18
+ 674:	21 e0       	ldi	r18, 0x01	; 1
+ 676:	30 e0       	ldi	r19, 0x00	; 0
+ 678:	b9 01       	movw	r22, r18
+ 67a:	02 c0       	rjmp	.+4      	; 0x680 <DIO_write+0xea>
+ 67c:	66 0f       	add	r22, r22
+ 67e:	77 1f       	adc	r23, r23
+ 680:	8a 95       	dec	r24
+ 682:	e2 f7       	brpl	.-8      	; 0x67c <DIO_write+0xe6>
+ 684:	cb 01       	movw	r24, r22
+ 686:	80 95       	com	r24
+ 688:	84 23       	and	r24, r20
+ 68a:	82 bb       	out	0x12, r24	; 18
+ 68c:	08 95       	ret
+ 68e:	41 30       	cpi	r20, 0x01	; 1
+ 690:	61 f4       	brne	.+24     	; 0x6aa <DIO_write+0x114>
+ 692:	42 b3       	in	r20, 0x12	; 18
+ 694:	21 e0       	ldi	r18, 0x01	; 1
+ 696:	30 e0       	ldi	r19, 0x00	; 0
+ 698:	b9 01       	movw	r22, r18
+ 69a:	02 c0       	rjmp	.+4      	; 0x6a0 <DIO_write+0x10a>
+ 69c:	66 0f       	add	r22, r22
+ 69e:	77 1f       	adc	r23, r23
+ 6a0:	8a 95       	dec	r24
+ 6a2:	e2 f7       	brpl	.-8      	; 0x69c <DIO_write+0x106>
+ 6a4:	cb 01       	movw	r24, r22
+ 6a6:	84 2b       	or	r24, r20
+ 6a8:	82 bb       	out	0x12, r24	; 18
+ 6aa:	08 95       	ret
+
+000006ac <DIO_toggle>:
+ 6ac:	62 34       	cpi	r22, 0x42	; 66
+ 6ae:	b1 f0       	breq	.+44     	; 0x6dc <DIO_toggle+0x30>
+ 6b0:	18 f4       	brcc	.+6      	; 0x6b8 <DIO_toggle+0xc>
+ 6b2:	61 34       	cpi	r22, 0x41	; 65
+ 6b4:	31 f0       	breq	.+12     	; 0x6c2 <DIO_toggle+0x16>
+ 6b6:	08 95       	ret
+ 6b8:	63 34       	cpi	r22, 0x43	; 67
+ 6ba:	e9 f0       	breq	.+58     	; 0x6f6 <DIO_toggle+0x4a>
+ 6bc:	64 34       	cpi	r22, 0x44	; 68
+ 6be:	41 f1       	breq	.+80     	; 0x710 <DIO_toggle+0x64>
+ 6c0:	08 95       	ret
+ 6c2:	4b b3       	in	r20, 0x1b	; 27
+ 6c4:	21 e0       	ldi	r18, 0x01	; 1
+ 6c6:	30 e0       	ldi	r19, 0x00	; 0
+ 6c8:	b9 01       	movw	r22, r18
+ 6ca:	02 c0       	rjmp	.+4      	; 0x6d0 <DIO_toggle+0x24>
+ 6cc:	66 0f       	add	r22, r22
+ 6ce:	77 1f       	adc	r23, r23
+ 6d0:	8a 95       	dec	r24
+ 6d2:	e2 f7       	brpl	.-8      	; 0x6cc <DIO_toggle+0x20>
+ 6d4:	cb 01       	movw	r24, r22
+ 6d6:	84 27       	eor	r24, r20
+ 6d8:	8b bb       	out	0x1b, r24	; 27
+ 6da:	08 95       	ret
+ 6dc:	48 b3       	in	r20, 0x18	; 24
+ 6de:	21 e0       	ldi	r18, 0x01	; 1
+ 6e0:	30 e0       	ldi	r19, 0x00	; 0
+ 6e2:	b9 01       	movw	r22, r18
+ 6e4:	02 c0       	rjmp	.+4      	; 0x6ea <DIO_toggle+0x3e>
+ 6e6:	66 0f       	add	r22, r22
+ 6e8:	77 1f       	adc	r23, r23
+ 6ea:	8a 95       	dec	r24
+ 6ec:	e2 f7       	brpl	.-8      	; 0x6e6 <DIO_toggle+0x3a>
+ 6ee:	cb 01       	movw	r24, r22
+ 6f0:	84 27       	eor	r24, r20
+ 6f2:	88 bb       	out	0x18, r24	; 24
+ 6f4:	08 95       	ret
+ 6f6:	45 b3       	in	r20, 0x15	; 21
+ 6f8:	21 e0       	ldi	r18, 0x01	; 1
+ 6fa:	30 e0       	ldi	r19, 0x00	; 0
+ 6fc:	b9 01       	movw	r22, r18
+ 6fe:	02 c0       	rjmp	.+4      	; 0x704 <DIO_toggle+0x58>
+ 700:	66 0f       	add	r22, r22
+ 702:	77 1f       	adc	r23, r23
+ 704:	8a 95       	dec	r24
+ 706:	e2 f7       	brpl	.-8      	; 0x700 <DIO_toggle+0x54>
+ 708:	cb 01       	movw	r24, r22
+ 70a:	84 27       	eor	r24, r20
+ 70c:	85 bb       	out	0x15, r24	; 21
+ 70e:	08 95       	ret
+ 710:	42 b3       	in	r20, 0x12	; 18
+ 712:	21 e0       	ldi	r18, 0x01	; 1
+ 714:	30 e0       	ldi	r19, 0x00	; 0
+ 716:	b9 01       	movw	r22, r18
+ 718:	02 c0       	rjmp	.+4      	; 0x71e <DIO_toggle+0x72>
+ 71a:	66 0f       	add	r22, r22
+ 71c:	77 1f       	adc	r23, r23
+ 71e:	8a 95       	dec	r24
+ 720:	e2 f7       	brpl	.-8      	; 0x71a <DIO_toggle+0x6e>
+ 722:	cb 01       	movw	r24, r22
+ 724:	84 27       	eor	r24, r20
+ 726:	82 bb       	out	0x12, r24	; 18
+ 728:	08 95       	ret
+
+0000072a <DIO_Reset>:
+{
+		/* skeleton:
+			This function Reset all ports
+			It Takes Nothing and return Nothing
+	    */
+	PORTA=0X00;
+ 72a:	1b ba       	out	0x1b, r1	; 27
+	PORTB=0X00;
+ 72c:	18 ba       	out	0x18, r1	; 24
+	PORTC=0X00;
+ 72e:	15 ba       	out	0x15, r1	; 21
+	PORTD=0X00;
+ 730:	12 ba       	out	0x12, r1	; 18
+ 732:	08 95       	ret
+
+00000734 <Enable_G_INTRS>:
+		skeleton :
+			This function Enable global interrupts
+			by setting bit 7 in the status register to 1 using sei() macro
+			This function Takes Nothing as a parameter and return Nothing
+	*/
+	sei();
+ 734:	78 94       	sei
+ 736:	08 95       	ret
+
+00000738 <Diable_G_INTRS>:
+		skeleton :
+			This function Disable global interrupts
+			by setting bit 7 in the status register to 0 using cli() macro
+			This function Takes Nothing as a parameter and return Nothing
+    */
+	cli();
+ 738:	f8 94       	cli
+ 73a:	08 95       	ret
+
+0000073c <Init_INTR_0>:
+			This function initialize interrupt 0
+			and choose the external interrupt sense then Enable External Interrupt 0
+			This function Takes Nothing as a parameter and return Nothing
+    */
+	//Enable global interrupts ------> setting bit 7 in the status register to 1
+	Enable_G_INTRS();
+ 73c:	0e 94 9a 03 	call	0x734	; 0x734 <Enable_G_INTRS>
+
+	// choose the external interrupt sense ---->sense on rising edge
+	MCUCR|=(1<<ISC00)| (1<<ISC01);
+ 740:	85 b7       	in	r24, 0x35	; 53
+ 742:	83 60       	ori	r24, 0x03	; 3
+ 744:	85 bf       	out	0x35, r24	; 53
+
+	// Enable External Interrupt 0 ----->  INT0
+	GICR |= (1<<INT0);
+ 746:	8b b7       	in	r24, 0x3b	; 59
+ 748:	80 64       	ori	r24, 0x40	; 64
+ 74a:	8b bf       	out	0x3b, r24	; 59
+ 74c:	08 95       	ret
+
+0000074e <TIMER_0_init>:
+			This function initialize the Timer 0 
+			put it in normal mode
+			and set initial value 0x00 for it
+			It take Nothing as a parameter and return Nothing
+	*/
+    TCCR0=0x00; // Normal Mode
+ 74e:	13 be       	out	0x33, r1	; 51
+    TCNT0=0x00; // set initial value
+ 750:	12 be       	out	0x32, r1	; 50
+ 752:	08 95       	ret
+
+00000754 <Stop_timer_0>:
+{
+	/* skeleton:
+			This function Stops the Timer
+			It takes Nothing and return Nothing
+	*/
+	TCCR0=0x00;
+ 754:	13 be       	out	0x33, r1	; 51
+ 756:	08 95       	ret
+
+00000758 <TIMER_0_set>:
+}
+
+
+void TIMER_0_set(uint32_t numberOfOverflows)
+{
+ 758:	cf 93       	push	r28
+ 75a:	df 93       	push	r29
+ 75c:	ec 01       	movw	r28, r24
+		skeleton:
+			This function start the timer 
+			and stop it after it satisfy the time you need
+			This function take unsigned integer as parameter and return Nothing
+	*/
+    TIMER_0_init();
+ 75e:	0e 94 a7 03 	call	0x74e	; 0x74e <TIMER_0_init>
+    int counter =0;
+
+    // timer start ---> setting prescaler
+    TCCR0|=(1<<0); // No prescaler
+ 762:	83 b7       	in	r24, 0x33	; 51
+ 764:	81 60       	ori	r24, 0x01	; 1
+ 766:	83 bf       	out	0x33, r24	; 51
+			This function start the timer 
+			and stop it after it satisfy the time you need
+			This function take unsigned integer as parameter and return Nothing
+	*/
+    TIMER_0_init();
+    int counter =0;
+ 768:	20 e0       	ldi	r18, 0x00	; 0
+ 76a:	30 e0       	ldi	r19, 0x00	; 0
+
+    // timer start ---> setting prescaler
+    TCCR0|=(1<<0); // No prescaler
+	
+    while(counter<numberOfOverflows)
+ 76c:	08 c0       	rjmp	.+16     	; 0x77e <TIMER_0_set+0x26>
+    {
+        // stop after one overflow ------> after 256 micro second
+        // wait until overflow flag to be set
+        while ((TIFR&(1<<0))==0);
+ 76e:	08 b6       	in	r0, 0x38	; 56
+ 770:	00 fe       	sbrs	r0, 0
+ 772:	fd cf       	rjmp	.-6      	; 0x76e <TIMER_0_set+0x16>
+        // Clear the overflow flag
+        TIFR|=(1<<0);
+ 774:	88 b7       	in	r24, 0x38	; 56
+ 776:	81 60       	ori	r24, 0x01	; 1
+ 778:	88 bf       	out	0x38, r24	; 56
+        counter++;
+ 77a:	2f 5f       	subi	r18, 0xFF	; 255
+ 77c:	3f 4f       	sbci	r19, 0xFF	; 255
+    int counter =0;
+
+    // timer start ---> setting prescaler
+    TCCR0|=(1<<0); // No prescaler
+	
+    while(counter<numberOfOverflows)
+ 77e:	2c 17       	cp	r18, r28
+ 780:	3d 07       	cpc	r19, r29
+ 782:	a8 f3       	brcs	.-22     	; 0x76e <TIMER_0_set+0x16>
+        // Clear the overflow flag
+        TIFR|=(1<<0);
+        counter++;
+    }
+    // stop timer
+	Stop_timer_0();  
+ 784:	0e 94 aa 03 	call	0x754	; 0x754 <Stop_timer_0>
+}
+ 788:	df 91       	pop	r29
+ 78a:	cf 91       	pop	r28
+ 78c:	08 95       	ret
+
+0000078e <_exit>:
+ 78e:	f8 94       	cli
+
+00000790 <__stop_program>:
+ 790:	ff cf       	rjmp	.-2      	; 0x790 <__stop_program>
